@@ -45,6 +45,7 @@ public class unzipUtil {
 			}
 			zipEntry = zipIn.getNextEntry();
 		}
+		zipIn.close();
 		return  unzippedFilelist;
 	}
 	
