@@ -2,10 +2,12 @@ package com.company;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 /**
  * 
@@ -26,6 +28,24 @@ public class unzipUtil {
 		if (!(destDir.exists())) {
 			destDir.mkdir();
 		}
+		
+		ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath));
+		
+		ZipEntry zipEntry = zipIn.getNextEntry();
+		while(zipEntry != null) {
+			String filePath = Directory+File.separator+zipEntry.getName();
+			
+			if(!zipEntry.isDirectory()) {
+				String oneUnZippedFile = extractFile(zipIn, filePath);
+				unzippedFilelist.add(oneUnZippedFile);
+			}
+			else {
+				File dir = new File(filePath);
+				dir.mkdir();
+			}
+			zipEntry = zipIn.getNextEntry();
+		}
+		return  unzippedFilelist;
 	}
 	
 	private static String extractFile(ZipInputStream zipIn, String filePath) throws IOException{
