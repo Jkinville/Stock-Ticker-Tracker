@@ -16,6 +16,7 @@ import java.util.zip.ZipInputStream;
  */
 public class unzipUtil {
 	private static final int S_BYTE_SIZE = 4096;
+	
 	public static List<String> download_And_Unzip(String urlString, String zipFilePath, String directory) throws IOException{
 		return null;
 	}
@@ -31,8 +32,8 @@ public class unzipUtil {
 		
 		ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath));
 		
-		ZipEntry zipEntry = zipIn.getNextEntry();
-		while(zipEntry != null) {
+		
+		for(ZipEntry zipEntry = zipIn.getNextEntry(); zipEntry != null; zipEntry = zipIn.getNextEntry()) {
 			String filePath = Directory+File.separator+zipEntry.getName();
 			
 			if(!zipEntry.isDirectory()) {
@@ -43,7 +44,7 @@ public class unzipUtil {
 				File dir = new File(filePath);
 				dir.mkdir();
 			}
-			zipEntry = zipIn.getNextEntry();
+			
 		}
 		zipIn.close();
 		return  unzippedFilelist;
