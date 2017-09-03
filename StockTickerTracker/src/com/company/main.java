@@ -8,7 +8,7 @@ public class main {
 		
 		List<String> newList = null;
 		try {
-			newList = unzipUtil.unzip("C:\\Users\\John\\Downloads\\lab1-3.zip", "C:\\Users\\John\\Downloads\\lab.zip");
+			newList = unzipUtil.unzip("C:\\Users\\John\\Downloads\\dummyDir.zip", "C:\\Users\\John\\Downloads\\dummyDirtest");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -16,7 +16,7 @@ public class main {
 		newList.forEach(item->System.out.println(item));
 		
 		System.out.println("end");
-		dummyFileGen newFile = new dummyFileGen("C:\\Users\\John\\Downloads\\dummyDir", "dummyFile");
+		dummyFileGen newFile = new dummyFileGen("C:\\Users\\John\\Downloads\\dummyDir.zip", "dummyFile");
 
 	}
 

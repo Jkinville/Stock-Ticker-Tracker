@@ -38,7 +38,7 @@ public class dummyFileGen {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ZipOutputStream zippedFile = new ZipOutputStream(new BufferedOutputStream(dest));
+		ZipOutputStream zippedFi = new ZipOutputStream(new BufferedOutputStream(dest));
 		try {
 			dest.close();
 		} catch (IOException e) {
