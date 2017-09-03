@@ -14,6 +14,8 @@ public class main {
 			e.printStackTrace();
 		}
 		newList.forEach(item->System.out.println(item));
+		
+		System.out.println("end");
 
 	}
 
