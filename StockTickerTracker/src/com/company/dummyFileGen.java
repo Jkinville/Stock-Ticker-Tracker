@@ -20,7 +20,7 @@ public class dummyFileGen {
 	
 	private void fillFile(ZipOutputStream zip) {
 		//FileOutputStream newOutputStream = new FileOutputStream()
-		for(int i = 1; i < 10000; ++i) {
+		for(int i = 1; i < 100000; ++i) {
 			String fileName = dummyName + "_" + i;
 			ZipEntry newFile = new ZipEntry(fileName+".txt");
 			String input = "";
