@@ -23,12 +23,20 @@ public class dummyFileGen {
 		for(int i = 1; i < 1000; ++i) {
 			String fileName = dummyName + "_" + i;
 			ZipEntry newFile = new ZipEntry(fileName+".txt");
-			
+			String input = "";
+			byte[] newByte = new byte[input.length()];
+			newByte = input.getBytes();
 			try {
 				zip.putNextEntry(newFile);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			try {
+				zip.write(newByte, 0, newByte.length);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 			try {
 				zip.closeEntry();
