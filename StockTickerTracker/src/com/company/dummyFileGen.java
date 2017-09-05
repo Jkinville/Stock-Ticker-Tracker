@@ -10,60 +10,44 @@ import java.io.FileNotFoundException;
 public class dummyFileGen {
 	File fileToZip;
 	String dummyName;
-	public dummyFileGen(String fileToZipName, String dummyName) {
-		fileToZip = new File(fileToZipName);
-		this.dummyName = dummyName;
-		zipDir();
+	public dummyFileGen() {
+		fillFile();
+		
+		
 		//fillFile(dummyName);
 		
 	}
 	
-	private void fillFile(ZipOutputStream zip) {
+	private void fillFile() {
 		//FileOutputStream newOutputStream = new FileOutputStream()
-		for(int i = 1; i < 1000; ++i) {
-			String fileName = dummyName + "_" + i;
-			ZipEntry newFile = new ZipEntry(fileName+".txt");
-			String input = "test";
-			byte[] newByte = new byte[input.length()];
-			newByte = input.getBytes();
-			try {
-				zip.putNextEntry(newFile);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				zip.write(newByte, 0, newByte.length);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			try {
-				zip.closeEntry();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		
-	}
-	private void zipDir() {
-		FileOutputStream dest = null;
+		File test = new File("C:\\Users\\John\\Downloads\\dummyZip.zip");
+		FileOutputStream tester = null;
 		try {
-			dest = new FileOutputStream(fileToZip);
+			tester = new FileOutputStream(test);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ZipOutputStream zippedFi = new ZipOutputStream(new BufferedOutputStream(dest));
-		fillFile(zippedFi);
+		ZipOutputStream out = null;
+		
+		out = new ZipOutputStream(tester);
+		for(int i = 0; i < 100; ++i) {
+		ZipEntry newzip =  new ZipEntry("dummyFile" + i +".text");
 		try {
-			dest.close();
+			out.putNextEntry(newzip);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		}
+		try {
+			out.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+
 	}
 
 }

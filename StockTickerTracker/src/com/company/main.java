@@ -7,10 +7,10 @@ public class main {
 	public static void main(String[] args) {
 		
 		List<String> newList = null;
-		dummyFileGen newFile = new dummyFileGen("C:\\Users\\John\\Downloads\\dummyDir.zip", "dummyFile");
+		dummyFileGen newFile = new dummyFileGen();
 
 		try {
-			newList = unzipUtil.unzip("C:\\Users\\John\\Downloads\\dummyDir.zip", "C:\\Users\\John\\Downloads\\dummyDirtest");
+			newList = unzipUtil.unzip("C:\\Users\\John\\Downloads\\dummyZip.zip", "C:\\Users\\John\\Downloads\\dummyDirtest");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
