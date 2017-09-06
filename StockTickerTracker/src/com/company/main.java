@@ -6,16 +6,15 @@ public class main {
 	
 	public static void main(String[] args) {
 		
-		List<String> newList = null;
-		dummyFileGen newFile = new dummyFileGen();
-
+		String url = "http://www.nyxdata.com/nysedata/asp/factbook/table_export_csv.asp?mode=table&key=3141";
+		String zipFilePath = "C:\\Users\\John\\Downloads\\dummyZip.zip";
+		String destination = "C:\\Users\\John\\Downloads\\dummyDirtest";
+		
 		try {
-			newList = unzipUtil.unzip("C:\\Users\\John\\Downloads\\dummyZip.zip", "C:\\Users\\John\\Downloads\\dummyDirtest");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			List<String> unZippedFile = unzipUtil.download_And_Unzip(url, zipFilePath, destination);
+		} catch(Exception ex) {
+			ex.printStackTrace();
 		}
-		newList.forEach(item->System.out.println(item));
 		
 		System.out.println("end");
 
