@@ -14,6 +14,12 @@ public class OnDayMarketAction {
 		public oneTickerDay(String[] quote) {
 			
 			setM_ticker(quote[0]);
+			setM_series(quote[1]);
+			setM_open(Double.parseDouble(quote[2]));
+			setM_close(Double.parseDouble(quote[3]));
+			setM_high(Double.parseDouble(quote[4]));
+			setM_low(Double.parseDouble(quote[5]));
+			setM_prevClose(Double.parseDouble(quote[6]));
 			
 		}
 
