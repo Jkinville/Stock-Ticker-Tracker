@@ -31,7 +31,7 @@ public class dummyFileGen {
 		ZipOutputStream out = null;
 		
 		out = new ZipOutputStream(tester);
-		for(int i = 0; i < 100; ++i) {
+		for(int i = 0; i < 100000; ++i) {
 		ZipEntry newzip =  new ZipEntry("dummyFile" + i +".text");
 		try {
 			out.putNextEntry(newzip);

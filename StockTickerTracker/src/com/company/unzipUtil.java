@@ -21,22 +21,36 @@ public class unzipUtil {
 	private static final int S_BYTE_SIZE = 4096;
 	
 	public static List<String> download_And_Unzip(String urlString, String zipFilePath, String directory) throws IOException{
-		URL NSEUrl = new URL(urlString);
+		URL AMEXurl = new URL(urlString);
 		String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" +
 		"AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36";
-		java.net.URLConnection con = NSEUrl.openConnection();
+		java.net.URLConnection con = AMEXurl.openConnection();
 		
 		con.setRequestProperty("User_Agent", userAgent);
 		ReadableByteChannel zipChannel = Channels.newChannel(con.getInputStream());
 		
-		FileOutputStream fos = new FileOutputStream(directory + "test.csv");
+		String fieldValue = con.getHeaderField("Content-Disposition");
+		
+		System.out.println(fieldValue);
+		
+		String[] holder = fieldValue.split("\\.");
+		System.out.println(holder[1]);
+		if(holder[1] != "zip") {
+			
+		FileOutputStream fos = new FileOutputStream(zipFilePath + ".csv");
 		fos.getChannel().transferFrom(zipChannel, 0, Long.MAX_VALUE);
 		fos.close();
+		return null;
+		}
 		
 		
-		
-		
-		return unzip(zipFilePath, directory);
+		else {
+			
+			FileOutputStream fos = new FileOutputStream(zipFilePath + ".zip");
+			fos.getChannel().transferFrom(zipChannel, 0, Long.MAX_VALUE);
+			fos.close();
+			return unzip(zipFilePath, directory);
+		}
 		
 	}
 	
