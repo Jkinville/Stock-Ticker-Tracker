@@ -31,10 +31,7 @@ public class unzipUtil {
 		
 		String fieldValue = con.getHeaderField("Content-Disposition");
 		
-		System.out.println(fieldValue);
-		
 		String[] holder = fieldValue.split("\\.");
-		System.out.println(holder[1]);
 		if(holder[1] != "zip") {
 			
 		FileOutputStream fos = new FileOutputStream(zipFilePath + ".csv");
