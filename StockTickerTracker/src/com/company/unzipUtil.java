@@ -34,10 +34,12 @@ public class unzipUtil {
 		String[] holder = fieldValue.split("\\.");
 		if(holder[1] != "zip") {
 			
-		FileOutputStream fos = new FileOutputStream(zipFilePath + ".csv");
-		fos.getChannel().transferFrom(zipChannel, 0, Long.MAX_VALUE);
-		fos.close();
-		return null;
+			FileOutputStream fos = new FileOutputStream(zipFilePath + ".csv");
+			fos.getChannel().transferFrom(zipChannel, 0, Long.MAX_VALUE);
+			List<String> unzippedFilelist = new ArrayList<>();
+			unzippedFilelist.add(zipFilePath + ".csv");
+			fos.close();
+			return unzippedFilelist;
 		}
 		
 		
