@@ -1,5 +1,11 @@
 package com.company;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 public class OnDayMarketAction {
 	public static class oneTickerDay{
 		
@@ -78,6 +84,54 @@ public class OnDayMarketAction {
 		public void setM_prevClose(double m_prevClose) {
 			this.m_prevClose = m_prevClose;
 		}
+		
+		public double getChange(){
+			if(this.getM_prevClose() != 0) {
+				return (this.getM_close() - this.getM_prevClose())/this.getM_prevClose();
+			}
+			return Double.NaN;
+		}
 	}
-
+	
+	private Map<String, oneTickerDay> mapOfTickers = new HashMap<>();
+	
+	private String m_fileName;
+	
+	public OnDayMarketAction(String csvFile){
+		
+		this.m_fileName = csvFile;
+		BufferedReader br = null;
+		String line = null;
+		String csvSplitBy = ",";
+		int lineNum = 0;
+		
+		try {
+			br = new BufferedReader(new FileReader(csvFile));
+			
+			while((line = br.readLine()) != null) {
+				lineNum++;
+				if(lineNum>1) {
+					
+					String[] currentQuote = line.split(csvSplitBy);
+					
+					OnDayMarketAction.oneTickerDay od = new OnDayMarketAction.oneTickerDay(currentQuote);
+					
+					if(od.getM_series().compareTo("EQ") == 0){
+						
+						mapOfTickers.put(currentQuote[0], od);
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				
+			}
+		}
+		
+	}
 }
