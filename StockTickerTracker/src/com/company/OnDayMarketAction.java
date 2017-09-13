@@ -3,7 +3,10 @@ package com.company;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class OnDayMarketAction {
@@ -133,5 +136,21 @@ public class OnDayMarketAction {
 			}
 		}
 		
+	}
+	public static class StockMoveComparator implements Comparator<oneTickerDay>{
+		public int compare(oneTickerDay stock1, oneTickerDay stock2) {
+			double change1 = stock1.getChange(), chang2 = stock2.getChange();
+			if(change1 > chang2)
+				return 1;
+			else if(chang2 > change1) 
+				return -1;
+			else
+				return 0;
+		}
+	}
+	
+	public List<oneTickerDay> getMovers(){
+		
+		List<oneTickerDay> ListOfAction = new ArrayList(this.mapOfTickers.values());
 	}
 }
