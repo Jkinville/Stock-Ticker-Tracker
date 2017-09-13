@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +38,7 @@ public class OnDayMarketAction {
 		}
 
 		public void setM_ticker(String m_ticker) {
-			this.m_ticker = m_ticker;
+			System.out.println(m_ticker);
 		}
 
 		public String getM_series() {
@@ -151,6 +152,10 @@ public class OnDayMarketAction {
 	
 	public List<oneTickerDay> getMovers(){
 		
-		List<oneTickerDay> ListOfAction = new ArrayList(this.mapOfTickers.values());
+		List<oneTickerDay> ListOfAction = new ArrayList<>(this.mapOfTickers.values());
+		Collections.sort(ListOfAction, new StockMoveComparator());
+		
+		return ListOfAction;
+		
 	}
 }
