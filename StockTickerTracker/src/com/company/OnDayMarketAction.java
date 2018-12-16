@@ -20,7 +20,7 @@ public class OnDayMarketAction {
 		private double m_high;
 		private double m_low;
 		private double m_prevClose;
-		
+
 		public oneTickerDay(String[] quote) {
 			
 			setM_ticker(quote[0]);
@@ -33,6 +33,7 @@ public class OnDayMarketAction {
 			
 		}
 
+		//Getters and setters
 		public String getM_ticker() {
 			return m_ticker;
 		}
@@ -100,7 +101,8 @@ public class OnDayMarketAction {
 	private Map<String, oneTickerDay> mapOfTickers = new HashMap<>();
 	
 	private String m_fileName;
-	
+
+	//Using a red green tree map and sorting by value, sort the value by their daily change.
 	public OnDayMarketAction(String csvFile){
 		
 		this.m_fileName = csvFile;
@@ -108,7 +110,8 @@ public class OnDayMarketAction {
 		String line = null;
 		String csvSplitBy = ",";
 		int lineNum = 0;
-		
+
+		//Try to load the CSV file
 		try {
 			br = new BufferedReader(new FileReader(csvFile));
 			
@@ -119,7 +122,8 @@ public class OnDayMarketAction {
 					String[] currentQuote = line.split(csvSplitBy);
 					
 					OnDayMarketAction.oneTickerDay od = new OnDayMarketAction.oneTickerDay(currentQuote);
-					
+
+					//If the value is higher than the others, add it to the front
 					if(od.getM_series().compareTo("EQ") == 0){
 						
 						mapOfTickers.put(currentQuote[0], od);
@@ -130,6 +134,7 @@ public class OnDayMarketAction {
 			e.printStackTrace();
 		}
 		finally {
+			//close the IO stream
 			try {
 				br.close();
 			} catch (IOException e) {
@@ -138,6 +143,7 @@ public class OnDayMarketAction {
 		}
 		
 	}
+	//Function to compare how much a stock had moved
 	public static class StockMoveComparator implements Comparator<oneTickerDay>{
 		public int compare(oneTickerDay stock1, oneTickerDay stock2) {
 			double change1 = stock1.getChange(), chang2 = stock2.getChange();
@@ -149,7 +155,8 @@ public class OnDayMarketAction {
 				return 0;
 		}
 	}
-	
+
+	//Function to finally get the stocks that have moved the most
 	public List<oneTickerDay> getMovers(){
 		
 		List<oneTickerDay> ListOfAction = new ArrayList<>(this.mapOfTickers.values());
